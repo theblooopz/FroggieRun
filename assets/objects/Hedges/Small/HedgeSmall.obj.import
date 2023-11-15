@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/HedgeSmall.obj-467160c2d50bfd1e8c0e068fe25de11e.mesh"
+
+[deps]
+
+files=[ "res://.import/HedgeSmall.obj-467160c2d50bfd1e8c0e068fe25de11e.mesh" ]
+
+source_file="res://assets/objects/Hedges/Small/HedgeSmall.obj"
+dest_files=[ "res://.import/HedgeSmall.obj-467160c2d50bfd1e8c0e068fe25de11e.mesh", "res://.import/HedgeSmall.obj-467160c2d50bfd1e8c0e068fe25de11e.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

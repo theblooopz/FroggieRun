@@ -1,0 +1,364 @@
+[gd_scene load_steps=38 format=2]
+
+[ext_resource path="res://assets/froggie/froggie3d.tscn" type="PackedScene" id=1]
+[ext_resource path="res://test.gd" type="Script" id=2]
+[ext_resource path="res://assets/fonts/ADELIA.otf" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/fonts/SuperMario256.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://startScreen.gd" type="Script" id=5]
+[ext_resource path="res://assets/sfx/button.ogg" type="AudioStream" id=6]
+[ext_resource path="res://addons/cloud/Cloud.gd" type="Script" id=7]
+[ext_resource path="res://addons/cloud/Cloud.shader" type="Shader" id=8]
+[ext_resource path="res://addons/cloud/CageMesh.tres" type="ArrayMesh" id=9]
+
+[sub_resource type="ShaderMaterial" id=21]
+render_priority = -121
+shader = ExtResource( 8 )
+shader_param/seed = -10000.0
+shader_param/speed = Vector2( 2, 0 )
+shader_param/transform_speed = Vector2( 0, 1e-05 )
+shader_param/min_density = 0.6
+shader_param/max_density = 6.0
+shader_param/altitude = 2000.0
+shader_param/color = Color( 0.568627, 0.698039, 0.878431, 1 )
+shader_param/detail_noise = true
+shader_param/upper_enabled = true
+shader_param/lower_enabled = false
+
+[sub_resource type="ShaderMaterial" id=22]
+render_priority = -122
+next_pass = SubResource( 21 )
+shader = ExtResource( 8 )
+shader_param/seed = -10000.0
+shader_param/speed = Vector2( 2, 0 )
+shader_param/transform_speed = Vector2( 0, 1e-05 )
+shader_param/min_density = 0.557835
+shader_param/max_density = 8.10825
+shader_param/altitude = 2022.29
+shader_param/color = Color( 0.683073, 0.778151, 0.910684, 1 )
+shader_param/detail_noise = false
+shader_param/upper_enabled = true
+shader_param/lower_enabled = false
+
+[sub_resource type="ShaderMaterial" id=23]
+render_priority = -123
+next_pass = SubResource( 22 )
+shader = ExtResource( 8 )
+shader_param/seed = -10000.0
+shader_param/speed = Vector2( 2, 0 )
+shader_param/transform_speed = Vector2( 0, 1e-05 )
+shader_param/min_density = 0.521047
+shader_param/max_density = 9.94763
+shader_param/altitude = 2044.57
+shader_param/color = Color( 0.779912, 0.845938, 0.937975, 1 )
+shader_param/detail_noise = false
+shader_param/upper_enabled = true
+shader_param/lower_enabled = false
+
+[sub_resource type="ShaderMaterial" id=24]
+render_priority = -124
+next_pass = SubResource( 23 )
+shader = ExtResource( 8 )
+shader_param/seed = -10000.0
+shader_param/speed = Vector2( 2, 0 )
+shader_param/transform_speed = Vector2( 0, 1e-05 )
+shader_param/min_density = 0.494329
+shader_param/max_density = 11.2836
+shader_param/altitude = 2066.86
+shader_param/color = Color( 0.859143, 0.9014, 0.960304, 1 )
+shader_param/detail_noise = false
+shader_param/upper_enabled = true
+shader_param/lower_enabled = false
+
+[sub_resource type="ShaderMaterial" id=25]
+render_priority = -125
+next_pass = SubResource( 24 )
+shader = ExtResource( 8 )
+shader_param/seed = -10000.0
+shader_param/speed = Vector2( 2, 0 )
+shader_param/transform_speed = Vector2( 0, 1e-05 )
+shader_param/min_density = 0.481086
+shader_param/max_density = 11.9457
+shader_param/altitude = 2089.14
+shader_param/color = Color( 0.920768, 0.944538, 0.977671, 1 )
+shader_param/detail_noise = false
+shader_param/upper_enabled = true
+shader_param/lower_enabled = false
+
+[sub_resource type="ShaderMaterial" id=26]
+render_priority = -126
+next_pass = SubResource( 25 )
+shader = ExtResource( 8 )
+shader_param/seed = -10000.0
+shader_param/speed = Vector2( 2, 0 )
+shader_param/transform_speed = Vector2( 0, 1e-05 )
+shader_param/min_density = 0.483009
+shader_param/max_density = 11.8496
+shader_param/altitude = 2111.43
+shader_param/color = Color( 0.964786, 0.97535, 0.990076, 1 )
+shader_param/detail_noise = false
+shader_param/upper_enabled = true
+shader_param/lower_enabled = false
+
+[sub_resource type="ShaderMaterial" id=27]
+render_priority = -127
+next_pass = SubResource( 26 )
+shader = ExtResource( 8 )
+shader_param/seed = -10000.0
+shader_param/speed = Vector2( 2, 0 )
+shader_param/transform_speed = Vector2( 0, 1e-05 )
+shader_param/min_density = 0.499851
+shader_param/max_density = 11.0074
+shader_param/altitude = 2133.71
+shader_param/color = Color( 0.991196, 0.993838, 0.997519, 1 )
+shader_param/detail_noise = false
+shader_param/upper_enabled = true
+shader_param/lower_enabled = false
+
+[sub_resource type="ShaderMaterial" id=28]
+render_priority = -128
+next_pass = SubResource( 27 )
+shader = ExtResource( 8 )
+shader_param/seed = -10000.0
+shader_param/speed = Vector2( 2, 0 )
+shader_param/transform_speed = Vector2( 0, 1e-05 )
+shader_param/min_density = 0.529466
+shader_param/max_density = 9.52671
+shader_param/altitude = 2156.0
+shader_param/color = Color( 1, 1, 1, 1 )
+shader_param/detail_noise = false
+shader_param/upper_enabled = true
+shader_param/lower_enabled = false
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_color = Color( 0.411765, 0.411765, 0.411765, 1 )
+
+[sub_resource type="DynamicFont" id=1]
+size = 84
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 4 )
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath(".:custom_fonts/font:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 84, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "title_anim"
+length = 2.0
+loop = true
+tracks/0/type = "bezier"
+tracks/0/path = NodePath(".:custom_fonts/font:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 112, -0.25, 0, 0.25, 0, 84, -0.25, 0, 0.25, 0, 112, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1, 2 )
+}
+
+[sub_resource type="DynamicFont" id=4]
+size = 36
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxEmpty" id=6]
+
+[sub_resource type="StyleBoxEmpty" id=7]
+
+[sub_resource type="StyleBoxEmpty" id=8]
+
+[sub_resource type="StyleBoxEmpty" id=9]
+
+[sub_resource type="StyleBoxEmpty" id=10]
+
+[sub_resource type="StyleBoxEmpty" id=11]
+
+[sub_resource type="StyleBoxEmpty" id=12]
+
+[sub_resource type="StyleBoxEmpty" id=13]
+
+[sub_resource type="StyleBoxEmpty" id=14]
+
+[sub_resource type="StyleBoxEmpty" id=15]
+
+[sub_resource type="StyleBoxEmpty" id=16]
+
+[sub_resource type="StyleBoxEmpty" id=17]
+
+[sub_resource type="StyleBoxEmpty" id=18]
+
+[sub_resource type="StyleBoxEmpty" id=19]
+
+[sub_resource type="StyleBoxEmpty" id=20]
+
+[node name="test" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="froggie3d" parent="." instance=ExtResource( 1 )]
+unique_name_in_owner = true
+
+[node name="CloudDome" type="MeshInstance" parent="froggie3d"]
+transform = Transform( 50.025, 0, 0, 0, 50.025, 0, 0, 0, 50.025, 0.490376, 1.42247, -2.01405 )
+material_override = SubResource( 28 )
+mesh = ExtResource( 9 )
+skeleton = NodePath("../..")
+script = ExtResource( 7 )
+draw_count = 8
+cloud_shadow_enabled = false
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( -0.784907, -0.0351944, -0.618613, -0.330228, 0.868536, 0.369586, 0.52428, 0.494374, -0.693343, -5.98719, 8.01671, 9.10985 )
+light_energy = 2.453
+shadow_enabled = true
+
+[node name="CSGBox" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, -55 )
+material_overlay = SubResource( 5 )
+use_collision = true
+width = 16.0
+height = 3.6863
+depth = 130.0
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( -0.97338, 0.0425716, -0.225209, 0, 0.982599, 0.185742, 0.229198, 0.180797, -0.956442, 0.490376, 1.42247, -2.01405 )
+current = true
+
+[node name="startScreen" type="CanvasLayer" parent="."]
+pause_mode = 2
+script = ExtResource( 5 )
+
+[node name="Label" type="Label" parent="startScreen"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -385.5
+margin_top = 63.0
+margin_right = 385.5
+margin_bottom = 175.0
+custom_colors/font_color = Color( 0.615686, 0.870588, 0.388235, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "Froggie Run"
+align = 1
+valign = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="startScreen/Label"]
+autoplay = "title_anim"
+anims/RESET = SubResource( 2 )
+anims/title_anim = SubResource( 3 )
+
+[node name="buttons" type="GridContainer" parent="startScreen"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 65.0
+margin_top = -325.0
+margin_right = 301.0
+margin_bottom = -57.0
+grow_vertical = 2
+custom_constants/vseparation = 20
+
+[node name="restartButton" type="Button" parent="startScreen/buttons"]
+visible = false
+margin_right = 224.0
+margin_bottom = 52.0
+focus_neighbour_bottom = NodePath("../playButton")
+focus_next = NodePath("../playButton")
+custom_colors/font_color_focus = Color( 0.25098, 0.682353, 0.811765, 1 )
+custom_colors/font_color = Color( 0.25098, 0.682353, 0.811765, 1 )
+custom_colors/font_color_hover = Color( 0.137255, 0.505882, 0.615686, 1 )
+custom_colors/font_color_pressed = Color( 0.25098, 0.682353, 0.811765, 1 )
+custom_fonts/font = SubResource( 4 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
+text = "Restart"
+flat = true
+align = 0
+
+[node name="playButton" type="Button" parent="startScreen/buttons"]
+margin_right = 224.0
+margin_bottom = 52.0
+focus_neighbour_top = NodePath("../restartButton")
+focus_neighbour_bottom = NodePath("../settingsButton")
+focus_next = NodePath("../settingsButton")
+focus_previous = NodePath("../restartButton")
+custom_colors/font_color_focus = Color( 0.921569, 0.909804, 0.243137, 1 )
+custom_colors/font_color = Color( 0.921569, 0.909804, 0.243137, 1 )
+custom_colors/font_color_hover = Color( 0.717647, 0.709804, 0.164706, 1 )
+custom_colors/font_color_pressed = Color( 0.921569, 0.909804, 0.243137, 1 )
+custom_fonts/font = SubResource( 4 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
+text = "Play"
+flat = true
+align = 0
+
+[node name="settingsButton" type="Button" parent="startScreen/buttons"]
+margin_top = 72.0
+margin_right = 224.0
+margin_bottom = 124.0
+focus_neighbour_top = NodePath("../playButton")
+focus_neighbour_bottom = NodePath("../quitButton")
+focus_next = NodePath("../quitButton")
+focus_previous = NodePath("../playButton")
+custom_colors/font_color_focus = Color( 0.533333, 0.788235, 0.372549, 1 )
+custom_colors/font_color_hover = Color( 0.533333, 0.788235, 0.372549, 1 )
+custom_colors/font_color_pressed = Color( 0.423529, 0.619608, 0.301961, 1 )
+custom_fonts/font = SubResource( 4 )
+custom_styles/hover = SubResource( 11 )
+custom_styles/pressed = SubResource( 12 )
+custom_styles/focus = SubResource( 13 )
+custom_styles/disabled = SubResource( 14 )
+custom_styles/normal = SubResource( 15 )
+text = "Settings"
+flat = true
+align = 0
+
+[node name="quitButton" type="Button" parent="startScreen/buttons"]
+margin_top = 144.0
+margin_right = 224.0
+margin_bottom = 196.0
+focus_neighbour_top = NodePath("../settingsButton")
+focus_previous = NodePath("../settingsButton")
+custom_colors/font_color_focus = Color( 0.533333, 0.788235, 0.372549, 1 )
+custom_colors/font_color_hover = Color( 0.533333, 0.788235, 0.372549, 1 )
+custom_colors/font_color_pressed = Color( 0.423529, 0.619608, 0.301961, 1 )
+custom_fonts/font = SubResource( 4 )
+custom_styles/hover = SubResource( 16 )
+custom_styles/pressed = SubResource( 17 )
+custom_styles/focus = SubResource( 18 )
+custom_styles/disabled = SubResource( 19 )
+custom_styles/normal = SubResource( 20 )
+text = "Quit"
+flat = true
+align = 0
+
+[node name="sfx" type="AudioStreamPlayer" parent="startScreen"]
+stream = ExtResource( 6 )
+bus = "SFX"
+
+[connection signal="mouse_entered" from="startScreen/buttons/restartButton" to="startScreen" method="_on_button_mouseover"]
+[connection signal="pressed" from="startScreen/buttons/restartButton" to="startScreen" method="_on_restartButton_pressed"]
+[connection signal="mouse_entered" from="startScreen/buttons/playButton" to="startScreen" method="_on_button_mouseover"]
+[connection signal="pressed" from="startScreen/buttons/playButton" to="startScreen" method="_on_playButton_pressed"]
+[connection signal="mouse_entered" from="startScreen/buttons/settingsButton" to="startScreen" method="_on_button_mouseover"]
+[connection signal="mouse_entered" from="startScreen/buttons/quitButton" to="startScreen" method="_on_button_mouseover"]
+[connection signal="pressed" from="startScreen/buttons/quitButton" to="startScreen" method="_on_quitButton_pressed"]
