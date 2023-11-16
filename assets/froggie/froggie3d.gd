@@ -31,7 +31,9 @@ func play():
 	set_process_input(true)
 	get_node("arm/Camera").set_current(true)
 	$state["parameters/conditions/play"]  = true
+	
 	Globals.hot_restart = true
+	Globals.playing = true
 
 func _input(event):
 	
@@ -50,12 +52,10 @@ func _input(event):
 	if event.is_action_pressed("move_left"):
 		if $move_left.is_stopped() and $move_right.is_stopped():
 			$move_left.start()
-			print("go left")
 	
 	if event.is_action_pressed("move_right"):
 		if $move_right.is_stopped() and $move_left.is_stopped():
 			$move_right.start()
-			print("go right")
 	
 	
 	###################################
@@ -97,7 +97,7 @@ func _physics_process(delta):
 		
 	if not $jump_timer.is_stopped():
 		move.y += JUMP_POWER
-	
+		
 	if not $move_left.is_stopped():
 		move.x -= 0.5
 		var rot = get_node("Froggie/Skeleton/Froggie_mesh").get_rotation()

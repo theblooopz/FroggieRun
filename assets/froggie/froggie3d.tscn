@@ -822,7 +822,7 @@ xfade_time = 0.25
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=39]
 advance_condition = "play"
-xfade_time = 0.5
+xfade_time = 0.75
 
 [sub_resource type="AnimationNodeStateMachine" id=14]
 states/Jump/node = SubResource( 29 )
@@ -833,7 +833,7 @@ states/Wave/node = SubResource( 38 )
 states/Wave/position = Vector2( 215, 187 )
 transitions = [ "Run", "Jump", SubResource( 30 ), "Jump", "Run", SubResource( 31 ), "Wave", "Run", SubResource( 39 ) ]
 start_node = "Wave"
-graph_offset = Vector2( -151, -97 )
+graph_offset = Vector2( -93, -10 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=15]
 
@@ -978,7 +978,7 @@ lod_LOD0_distance = 10.0
 lod_LOD1_distance = 100.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-playback_speed = 2.0
+playback_speed = 3.0
 anims/Idle = SubResource( 3 )
 anims/Jump = SubResource( 4 )
 anims/PoseLib = SubResource( 5 )
@@ -990,6 +990,7 @@ anims/Wave = SubResource( 8 )
 tree_root = SubResource( 14 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
+root_motion_track = NodePath("Froggie/Skeleton:Root")
 parameters/playback = SubResource( 15 )
 parameters/conditions/jump = false
 parameters/conditions/play = false
@@ -1012,15 +1013,17 @@ margin = 0.5
 
 [node name="jump_timer" type="Timer" parent="."]
 process_mode = 0
-wait_time = 0.25
+wait_time = 0.2
 one_shot = true
 
 [node name="move_left" type="Timer" parent="."]
 process_mode = 0
+wait_time = 0.75
 one_shot = true
 
 [node name="move_right" type="Timer" parent="."]
 process_mode = 0
+wait_time = 0.75
 one_shot = true
 
 [node name="mouse_control_stay_delay" type="Timer" parent="."]
@@ -1033,6 +1036,7 @@ debug_shape_custom_color = Color( 1, 0, 0, 1 )
 
 [node name="sfx_jump" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
+volume_db = -16.0
 bus = "SFX"
 
 [node name="sfx_step1" type="AudioStreamPlayer" parent="."]

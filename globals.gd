@@ -1,6 +1,8 @@
 extends Node
 
 var hot_restart = false
+var coins = 0
+var playing = false
 
 func _ready():
 	set_process_input(true)
