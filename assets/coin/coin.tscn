@@ -6,8 +6,8 @@
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_texture = ExtResource( 1 )
-metallic = 0.13
-roughness = 0.63
+metallic_specular = 0.45
+roughness = 0.41
 rim_enabled = true
 rim = 1.0
 rim_tint = 0.5
@@ -86,13 +86,13 @@ tracks/2/keys = {
 
 [sub_resource type="SphereShape" id=4]
 
-[node name="coin" type="Spatial"]
+[node name="coin" type="Area" groups=["DESTROY"]]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
 script = ExtResource( 2 )
 
 [node name="CSGCylinder" type="CSGCylinder" parent="."]
 transform = Transform( -1, -8.74228e-08, 3.82137e-15, 0, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, 0, 0, 0 )
-material_overlay = SubResource( 1 )
+material_override = SubResource( 1 )
 height = 0.152
 sides = 32
 
@@ -101,11 +101,6 @@ autoplay = "coin_spin"
 anims/RESET = SubResource( 2 )
 anims/coin_spin = SubResource( 3 )
 
-[node name="Area" type="Area" parent="."]
-
-[node name="CollisionShape" type="CollisionShape" parent="Area"]
-shape = SubResource( 4 )
-
 [node name="sfx_coin" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 bus = "SFX"
@@ -113,5 +108,8 @@ bus = "SFX"
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
-[connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 4 )
+
+[connection signal="body_entered" from="." to="." method="_on_coin_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

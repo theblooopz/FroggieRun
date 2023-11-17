@@ -1,4 +1,4 @@
-extends Spatial
+extends Area
 
 
 # Declare member variables here. Examples:
@@ -16,14 +16,14 @@ func _ready():
 #	pass
 
 
-func _on_Area_body_entered(body):
-	if body.is_in_group("PLAYER"):
-		$sfx_coin.play()
-		Globals.coins += 1
-		$Area.set_monitoring(false)
-		hide()
-		$Timer.start()
-
-
 func _on_Timer_timeout():
 	queue_free()
+
+
+func _on_coin_body_entered(body):
+	if body.is_in_group("PLAYER"):
+		$sfx_coin.play()
+		Globals.add_coin()
+		set_deferred("set_monitoring", false)
+		hide()
+		$Timer.start()

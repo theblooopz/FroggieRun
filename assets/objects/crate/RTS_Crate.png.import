@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/alien-panels_albedo.png-915a1dabca7c5eab6c9898316d1363b3.s3tc.stex"
-path.etc2="res://.import/alien-panels_albedo.png-915a1dabca7c5eab6c9898316d1363b3.etc2.stex"
+path.s3tc="res://.import/RTS_Crate.png-04e72180ff2816dbd78b154dcf99332f.s3tc.stex"
+path.etc2="res://.import/RTS_Crate.png-04e72180ff2816dbd78b154dcf99332f.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/textures/alien-panels-bl/alien-panels_albedo.png"
-dest_files=[ "res://.import/alien-panels_albedo.png-915a1dabca7c5eab6c9898316d1363b3.s3tc.stex", "res://.import/alien-panels_albedo.png-915a1dabca7c5eab6c9898316d1363b3.etc2.stex" ]
+source_file="res://assets/objects/crate/RTS_Crate.png"
+dest_files=[ "res://.import/RTS_Crate.png-04e72180ff2816dbd78b154dcf99332f.s3tc.stex", "res://.import/RTS_Crate.png-04e72180ff2816dbd78b154dcf99332f.etc2.stex" ]
 
 [params]
 
@@ -24,7 +24,7 @@ compress/normal_map=0
 flags/repeat=true
 flags/filter=true
 flags/mipmaps=true
-flags/anisotropic=true
+flags/anisotropic=false
 flags/srgb=1
 process/fix_alpha_border=true
 process/premult_alpha=false

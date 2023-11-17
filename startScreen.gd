@@ -28,6 +28,7 @@ func _on_quitButton_pressed():
 
 func _on_playButton_pressed():
 	get_tree().set_pause(false)
+	get_node("%hud").show()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	if Globals.hot_restart:
 		hide()

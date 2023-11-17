@@ -15,8 +15,11 @@ var v_acceleration = 15
 var move = Vector3.ZERO
 var step_sounds
 
+var landed = true
+var dead = false
+
 func _ready():
-	set_process_input(false)
+	if not Globals.hot_restart: set_process_input(false)
 	
 	step_sounds = [
 		$sfx_step1,
@@ -34,6 +37,9 @@ func play():
 	
 	Globals.hot_restart = true
 	Globals.playing = true
+	
+	$state["parameters/Run/Run/TimeScale/scale"] = 1.5
+	$state["parameters/Run/Run 2/TimeScale/scale"] = 1.5
 
 func _input(event):
 	
@@ -92,8 +98,12 @@ func _physics_process(delta):
 
 	if not $ground_ray.is_colliding():
 		move.y -= GRAVITY
+		landed = false
 	else:
 		move.y = 0
+		if not landed:
+			$sfx_land.play()
+			landed = true
 		
 	if not $jump_timer.is_stopped():
 		move.y += JUMP_POWER
@@ -117,6 +127,21 @@ func _physics_process(delta):
 		get_node("Froggie/Skeleton/Froggie_mesh").set_rotation(rot1)
 
 	move = move_and_slide(move, Vector3.UP, false)
+	
+	
+	#################################
+	
+	if $front_ray.is_colliding():
+		var col = $front_ray.get_collider()
+		if col.is_in_group("MOVE"):
+			var n = $front_ray.get_collision_normal()*-1
+			col.apply_impulse($front_ray.get_collision_point(), n)
+		if col.is_in_group("DEATH"):
+			make_dead()
+
+func make_dead():
+	Globals.playing = false
+	$state["parameters/conditions/dead"] = true
 
 func play_step():
 	if $ground_ray.is_colliding():
