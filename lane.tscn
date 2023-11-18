@@ -9,10 +9,12 @@
 
 [sub_resource type="SpatialMaterial" id=40]
 albedo_texture = ExtResource( 3 )
+metallic = 0.42
+metallic_specular = 0.42
 metallic_texture = ExtResource( 1 )
 roughness_texture = ExtResource( 5 )
 normal_enabled = true
-normal_scale = 1.0
+normal_scale = 1.57
 normal_texture = ExtResource( 4 )
 ao_enabled = true
 ao_light_affect = 0.0
@@ -29,6 +31,7 @@ script = ExtResource( 6 )
 [node name="csgbox2" type="CSGBox" parent="." groups=["TILE"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -1, -64 )
 cast_shadow = 0
+calculate_tangents = false
 use_collision = true
 width = 8.0
 depth = 128.0

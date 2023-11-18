@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://assets/sfx/Jump1.wav" type="AudioStream" id=1]
 [ext_resource path="res://addons/shell_fur/shell_fur_manager.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://assets/sfx/step_cloth4.ogg" type="AudioStream" id=8]
 [ext_resource path="res://assets/sfx/step_cloth2.ogg" type="AudioStream" id=9]
 [ext_resource path="res://assets/sfx/step_cloth3.ogg" type="AudioStream" id=10]
+[ext_resource path="res://assets/sfx/crate_smash.wav" type="AudioStream" id=11]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "froggie3d_Mesh"
@@ -754,6 +755,28 @@ states/Idle/node = SubResource( 50 )
 states/Idle/position = Vector2( 317, 87 )
 start_node = "Idle"
 
+[sub_resource type="AnimationNodeAnimation" id=55]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeAnimation" id=56]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=57]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=58]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachine" id=59]
+states/Idle/node = SubResource( 56 )
+states/Idle/position = Vector2( 373, 51 )
+"states/Idle 2/node" = SubResource( 55 )
+"states/Idle 2/position" = Vector2( 536, 68 )
+transitions = [ "Idle 2", "Idle", SubResource( 57 ), "Idle", "Idle 2", SubResource( 58 ) ]
+start_node = "Idle"
+
 [sub_resource type="AnimationNodeAnimation" id=25]
 animation = "Jump"
 
@@ -842,36 +865,52 @@ start_node = "Wave"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=30]
 advance_condition = "jump"
-xfade_time = 0.25
+xfade_time = 0.15
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=31]
 advance_condition = "run"
-xfade_time = 0.25
+xfade_time = 0.15
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=39]
 advance_condition = "play"
-xfade_time = 0.1
+xfade_time = 0.15
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=52]
 advance_condition = "dead"
 xfade_time = 0.25
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=54]
+advance_condition = "run"
+xfade_time = 0.25
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=61]
+advance_condition = "run"
+xfade_time = 0.25
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=62]
+advance_condition = "idle"
+xfade_time = 0.25
+
 [sub_resource type="AnimationNodeStateMachine" id=14]
 states/Dead/node = SubResource( 51 )
 states/Dead/position = Vector2( 74, 6 )
+states/Idle/node = SubResource( 59 )
+states/Idle/position = Vector2( 254, -37 )
 states/Jump/node = SubResource( 29 )
 states/Jump/position = Vector2( 497, 66 )
 states/Run/node = SubResource( 23 )
 states/Run/position = Vector2( 252, 80 )
 states/Wave/node = SubResource( 38 )
 states/Wave/position = Vector2( 215, 187 )
-transitions = [ "Run", "Jump", SubResource( 30 ), "Jump", "Run", SubResource( 31 ), "Wave", "Run", SubResource( 39 ), "Run", "Dead", SubResource( 52 ) ]
+transitions = [ "Run", "Jump", SubResource( 30 ), "Jump", "Run", SubResource( 31 ), "Wave", "Run", SubResource( 39 ), "Run", "Dead", SubResource( 52 ), "Dead", "Run", SubResource( 54 ), "Idle", "Run", SubResource( 61 ), "Run", "Idle", SubResource( 62 ) ]
 start_node = "Wave"
-graph_offset = Vector2( -240, -84 )
+graph_offset = Vector2( -216, -55 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=15]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=53]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=60]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=32]
 
@@ -879,12 +918,11 @@ graph_offset = Vector2( -240, -84 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=40]
 
-[sub_resource type="CapsuleShape" id=17]
-radius = 0.487
-height = 0.262
+[sub_resource type="SphereShape" id=63]
+radius = 0.652
 
 [sub_resource type="RayShape" id=41]
-length = 2.5
+length = 2.66
 slips_on_slope = true
 
 [node name="froggie3d" type="KinematicBody" groups=["PLAYER"]]
@@ -986,24 +1024,24 @@ pattern_texture = ExtResource( 4 )
 pattern_uv_scale = 1.0
 cast_shadow = false
 mat_transmission = Color( 0.219608, 0.219608, 0.219608, 1 )
-mat_ao = 0.769
+mat_ao = 0.81
 mat_ao_light_affect = 1.0
 mat_roughness = 1.0
 mat_albedo_color = Transform( 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0 )
 mat_albedo_uv_scale = Vector3( 1, 1, 0 )
 mat_albedo_texture = ExtResource( 3 )
-mat_shape_length = 0.283
-mat_shape_length_rand = 0.405
+mat_shape_length = 0.3
+mat_shape_length_rand = 0.15
 mat_shape_density = 1.0
-mat_shape_thickness_base = 0.75
-mat_shape_thickness_tip = 0.079
-mat_shape_thickness_rand = 0.0
+mat_shape_thickness_base = 0.6
+mat_shape_thickness_tip = 0.2
+mat_shape_thickness_rand = 0.05
 mat_shape_growth = 1.985
 mat_shape_growth_rand = 0.0
 mat_shape_ldtg_uv_scale = Vector3( 1, 1, 0 )
 mat_shape_ldtg_texture = null
 physics_custom_physics_pivot = NodePath("")
-physics_gravity = 0.048
+physics_gravity = 0.15
 physics_spring = 10.0
 physics_damping = 0.1
 physics_wind_strength = 0.0
@@ -1029,10 +1067,12 @@ active = true
 root_motion_track = NodePath("Froggie/Skeleton:Root")
 parameters/playback = SubResource( 15 )
 parameters/conditions/dead = false
+parameters/conditions/idle = false
 parameters/conditions/jump = false
 parameters/conditions/play = false
 parameters/conditions/run = true
 parameters/Dead/playback = SubResource( 53 )
+parameters/Idle/playback = SubResource( 60 )
 parameters/Jump/playback = SubResource( 32 )
 parameters/Run/playback = SubResource( 24 )
 parameters/Run/Run/TimeScale/scale = 1.0
@@ -1040,13 +1080,13 @@ parameters/Run/Run/TimeScale/scale = 1.0
 parameters/Wave/playback = SubResource( 40 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.695, 0 )
-shape = SubResource( 17 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.728051, 0.0201985 )
+shape = SubResource( 63 )
 
 [node name="arm" type="SpringArm" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.481, 0 )
 shape = SubResource( 41 )
-spring_length = 4.0
+spring_length = 2.66
 margin = 0.5
 
 [node name="Camera" type="Camera" parent="arm"]
@@ -1069,9 +1109,9 @@ one_shot = true
 [node name="mouse_control_stay_delay" type="Timer" parent="."]
 
 [node name="ground_ray" type="RayCast" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.126, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.196, 0 )
 enabled = true
-cast_to = Vector3( 0, -0.153, 0 )
+cast_to = Vector3( 0, -0.224, 0 )
 debug_shape_custom_color = Color( 1, 0, 0, 1 )
 
 [node name="sfx_jump" type="AudioStreamPlayer" parent="."]
@@ -1113,6 +1153,21 @@ cast_to = Vector3( 0, 0, -0.713 )
 collision_mask = 3
 collide_with_areas = true
 
+[node name="redo_timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="sfx_crate" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+volume_db = -15.0
+bus = "SFX"
+
+[node name="sfx_timer" type="Timer" parent="."]
+wait_time = 0.75
+one_shot = true
+
 [connection signal="timeout" from="jump_timer" to="." method="_on_jump_timer_timeout"]
 [connection signal="timeout" from="move_left" to="." method="_on_move_left_timeout"]
 [connection signal="timeout" from="move_right" to="." method="_on_move_right_timeout"]
+[connection signal="timeout" from="redo_timer" to="." method="_on_redo_timer_timeout"]
+[connection signal="timeout" from="sfx_timer" to="." method="_on_sfx_timer_timeout"]

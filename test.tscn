@@ -265,9 +265,9 @@ focus_neighbour_top = NodePath("../restartButton")
 focus_neighbour_bottom = NodePath("../settingsButton")
 focus_next = NodePath("../settingsButton")
 focus_previous = NodePath("../restartButton")
-custom_colors/font_color_focus = Color( 0.921569, 0.909804, 0.243137, 1 )
+custom_colors/font_color_focus = Color( 0.670588, 0.662745, 0.145098, 1 )
 custom_colors/font_color = Color( 0.921569, 0.909804, 0.243137, 1 )
-custom_colors/font_color_hover = Color( 0.717647, 0.709804, 0.164706, 1 )
+custom_colors/font_color_hover = Color( 0.670588, 0.662745, 0.145098, 1 )
 custom_colors/font_color_pressed = Color( 0.921569, 0.909804, 0.243137, 1 )
 custom_fonts/font = SubResource( 4 )
 custom_styles/hover = SubResource( 6 )
@@ -357,8 +357,8 @@ current = true
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( -0.784907, -0.0351944, -0.618613, -0.330228, 0.868536, 0.369586, 0.52428, 0.494374, -0.693343, -5.98719, 8.01671, 9.10985 )
-light_color = Color( 0.929412, 0.882353, 0.882353, 1 )
-light_energy = 2.453
+light_color = Color( 1, 0.882353, 0.882353, 1 )
+light_energy = 7.281
 shadow_enabled = true
 
 [node name="music" type="AudioStreamPlayer" parent="."]
@@ -424,3 +424,5 @@ shape = SubResource( 40 )
 [connection signal="area_entered" from="trail_destroy" to="." method="_on_trail_destroy_area_entered"]
 [connection signal="body_entered" from="trail_destroy" to="." method="_on_trail_destroy_body_entered"]
 [connection signal="body_exited" from="container" to="." method="_on_container_body_exited"]
+
+[editable path="tiles/lane_str"]
