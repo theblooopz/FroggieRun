@@ -3,10 +3,11 @@ extends Node
 var hot_restart = false
 var coins = 0
 var playing = false
-
+var showing_main_menu = true
 
 func _ready():
 	set_process_input(true)
+	
 
 func add_coin():
 	coins += 1
@@ -17,6 +18,7 @@ func _input(event):
 	if event.is_action_pressed("cmd_restart") and hot_restart:
 		coins = 0
 		playing = true
+		showing_main_menu = false
 		get_tree().set_pause(false)
 		get_tree().reload_current_scene()
 	

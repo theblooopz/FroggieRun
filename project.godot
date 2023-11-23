@@ -35,6 +35,8 @@ Globals="*res://globals.gd"
 
 window/size/width=1280
 window/size/height=720
+window/size/test_width=960
+window/size/test_height=540
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 
@@ -89,6 +91,8 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
+quality/shadows/filter_mode=2
+quality/shadows/filter_mode.mobile=1
 quality/filters/use_nearest_mipmap_filter=true
 quality/filters/use_fxaa=true
 environment/default_environment="res://default_env.tres"

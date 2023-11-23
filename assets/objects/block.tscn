@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 0.376471, 0.709804, 0.352941, 1 )
+
+[node name="block" type="CSGBox" groups=["BLOCK", "DEATH", "DESTROY"]]
+transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0 )
+material_override = SubResource( 1 )
+use_collision = true
+height = 1.0

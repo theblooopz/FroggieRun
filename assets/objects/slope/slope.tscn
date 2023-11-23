@@ -1,8 +1,13 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://assets/objects/slope/slope.obj" type="ArrayMesh" id=1]
 
-[node name="slope" type="CSGMesh" groups=["DESTROY"]]
+[sub_resource type="SpatialMaterial" id=1]
+params_cull_mode = 2
+albedo_color = Color( 0, 0.498039, 1, 1 )
+
+[node name="slope" type="CSGMesh" groups=["DESTROY", "SLOPE"]]
 transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0 )
+material_override = SubResource( 1 )
 use_collision = true
 mesh = ExtResource( 1 )

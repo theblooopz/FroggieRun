@@ -86,3 +86,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -116 )
 
 [node name="spawn16" type="Spatial" parent="spawns"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -124 )
+
+[node name="ray" type="RayCast" parent="."]
+enabled = true
+cast_to = Vector3( 12, 0, 0 )
+collide_with_areas = true
+debug_shape_custom_color = Color( 0.968627, 0, 1, 1 )
+debug_shape_thickness = 5

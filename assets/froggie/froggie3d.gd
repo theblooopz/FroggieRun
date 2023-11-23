@@ -22,6 +22,9 @@ var can_move = true
 var can_redo = true
 var can_play_sound = true
 
+var front_ray
+var ground_ray
+
 func _ready():
 	if not Globals.hot_restart: set_process_input(false)
 	
@@ -31,6 +34,9 @@ func _ready():
 		$sfx_step3,
 		$sfx_step4
 	]
+	
+	front_ray = get_node("Froggie/Skeleton/Froggie_mesh/front_ray")
+	ground_ray = get_node("Froggie/Skeleton/Froggie_mesh/ground_ray")
 
 func play():
 	
@@ -38,48 +44,60 @@ func play():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	set_physics_process(true)
 	set_process_input(true)
-	get_node("arm/Camera").set_current(true)
+	get_node("arm/cam").set_current(true)
 	$state["parameters/conditions/play"]  = true
 	
 	Globals.hot_restart = true
 	Globals.playing = true
 	
-	$state["parameters/Run/Run/TimeScale/scale"] = 1.5
-	$state["parameters/Run/Run 2/TimeScale/scale"] = 1.5
+	$state["parameters/Run/Run/TimeScale/scale"] = 1.66
+	$state["parameters/Run/Run 2/TimeScale/scale"] = 1.66
 
 func _input(event):
 	
 	if event.is_action_pressed("move_jump") and can_move:
-		if $ground_ray.is_colliding() and $jump_timer.is_stopped() and $move_left.is_stopped() and $move_right.is_stopped():
-			$jump_timer.start()
-			$sfx_jump.play()
-			$state["parameters/conditions/jump"]  = true
-			$state["parameters/conditions/run"]  = false
+		make_move_jump()
 
 	if event.is_action_released("move_jump") and can_move:
-		if not $jump_timer.is_stopped():
-			$jump_timer.stop()
-			_on_jump_timer_timeout()
+		make_move_land()
 	
 	if event.is_action_pressed("move_left"):
-		if $move_left.is_stopped() and $move_right.is_stopped() and can_move:
-			$move_left.start()
-			$state["parameters/conditions/run"]  = true
-			$state["parameters/conditions/dead"]  = false
-
+		make_move_left()
+		
 	if event.is_action_pressed("move_right"):
-		if $move_right.is_stopped() and $move_left.is_stopped() and can_move:
-			$move_right.start()
-			$state["parameters/conditions/run"]  = true
-			$state["parameters/conditions/dead"]  = false
-	
+		make_move_right()
+		
 	###################################
 	
 	if event is InputEventMouseMotion:
 		$mouse_control_stay_delay.start()
 		camrot_h -= event.relative.x * h_sensitivity
 		camrot_v += event.relative.y * v_sensitivity
-	
+
+func make_move_left():
+	if $move_left.is_stopped() and $move_right.is_stopped() and can_move:
+		$move_left.start()
+		$state["parameters/conditions/run"]  = true
+		$state["parameters/conditions/dead"]  = false
+
+func make_move_right():
+	if $move_right.is_stopped() and $move_left.is_stopped() and can_move:
+		$move_right.start()
+		$state["parameters/conditions/run"]  = true
+		$state["parameters/conditions/dead"]  = false
+
+func make_move_land():
+	if not $jump_timer.is_stopped():
+		$jump_timer.stop()
+		#_on_jump_timer_timeout()
+
+func make_move_jump():
+	if ground_ray.is_colliding() and $jump_timer.is_stopped() and $move_left.is_stopped() and $move_right.is_stopped():
+		$jump_timer.start()
+		$sfx_jump.play()
+		$state["parameters/conditions/jump"]  = true
+		$state["parameters/conditions/run"]  = false
+
 func _physics_process(delta):
 	
 	########################
@@ -90,24 +108,21 @@ func _physics_process(delta):
 	var rot_speed_multiplier = 0.15 #reduce this to make the rotation radius larger
 	var auto_rotate_speed =  (PI - mesh_front.angle_to($arm.global_transform.basis.z)) * move.length() * rot_speed_multiplier
 
-	if $mouse_control_stay_delay.is_stopped():
-		#FOLLOW CAMERA
-		$arm.rotation.y = lerp_angle($arm.rotation.y, get_node("Froggie").global_transform.basis.get_euler().y, delta * auto_rotate_speed)
+#	if $mouse_control_stay_delay.is_stopped():
+#		$arm.rotation.y = lerp_angle($arm.rotation.y, get_node("Froggie").global_transform.basis.get_euler().y, delta * auto_rotate_speed)
+#
+#	else:
+	var lerp_y = lerp($arm.get_rotation().y, camrot_h, delta * h_acceleration)
+	$arm.set_rotation(Vector3($arm.get_rotation().x, lerp_y, $arm.get_rotation().z))
 
-	else:
-		pass
-		#MOUSE CAMERA
-		var lerp_y = lerp($arm.get_rotation().y, camrot_h, delta * h_acceleration)
-		$arm.set_rotation(Vector3($arm.get_rotation().x, lerp_y, $arm.get_rotation().z))
-	
 	var lerp_x = lerp($arm.get_rotation().x, camrot_v, delta * v_acceleration)
 	$arm.set_rotation(Vector3(lerp_x, $arm.get_rotation().y, $arm.get_rotation().z))
 	
 	############################################
 
-	var a = $ground_ray.get_collision_normal().angle_to($ground_ray.cast_to) 
+	var a = ground_ray.get_collision_normal().angle_to(ground_ray.cast_to) 
 
-	if not $ground_ray.is_colliding():
+	if not ground_ray.is_colliding():
 		move.y -= GRAVITY
 		landed = false
 	else:
@@ -146,11 +161,11 @@ func _physics_process(delta):
 	
 	#################################
 	
-	if $front_ray.is_colliding():
-		var col = $front_ray.get_collider()
+	if front_ray.is_colliding():
+		var col = front_ray.get_collider()
 		if col.is_in_group("MOVE"):
-			var n = $front_ray.get_collision_normal()*-1
-			col.apply_impulse($front_ray.get_collision_point(), n)
+			var n = front_ray.get_collision_normal()*-1
+			col.apply_impulse(front_ray.get_collision_point(), n)
 			if col.is_in_group("CRATE"):
 				if $sfx_timer.is_stopped():
 					if can_play_sound:
@@ -160,7 +175,7 @@ func _physics_process(delta):
 		if col.is_in_group("DEATH"):
 			make_dead()
 	
-	if $ground_ray.is_colliding():
+	if ground_ray.is_colliding():
 		can_move = true
 		if Globals.playing:
 			$state["parameters/conditions/jump"] = false
@@ -172,7 +187,7 @@ func _physics_process(delta):
 		
 	############################################
 	
-	if $ground_ray.is_colliding() and $move_left.is_stopped() and $move_right.is_stopped() and $jump_timer.is_stopped():
+	if ground_ray.is_colliding() and $move_left.is_stopped() and $move_right.is_stopped() and $jump_timer.is_stopped():
 		var t = get_translation()
 		if t.x != -12 || t.x != -4 || t.x != 4:
 			
@@ -194,8 +209,9 @@ func make_dead():
 
 	if not hit:
 		hit = true
-		$state["parameters/conditions/dead"] = true
+		$state["parameters/conditions/idle"] = true
 		$state["parameters/conditions/run"] = false
+		$state["parameters/conditions/jump"] = false
 	
 	if can_redo:
 		$redo_timer.start()
@@ -206,11 +222,13 @@ func make_dead():
 
 func make_redo():
 	can_move = true
+	$state["parameters/conditions/idle"] = false
 	$state["parameters/conditions/run"] = true
+	$state["parameters/conditions/jump"] = false
 	Globals.playing = true
 
 func play_step():
-	if $ground_ray.is_colliding():
+	if ground_ray.is_colliding():
 		var r = randi() % 4
 		step_sounds[r].play()
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://assets/froggie/froggie3d.tscn" type="PackedScene" id=1]
 [ext_resource path="res://test.gd" type="Script" id=2]
@@ -7,12 +7,12 @@
 [ext_resource path="res://startScreen.gd" type="Script" id=5]
 [ext_resource path="res://assets/sfx/button.ogg" type="AudioStream" id=6]
 [ext_resource path="res://lane.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/textures/touch_buttons.png" type="Texture" id=8]
 [ext_resource path="res://assets/music/cyber_runner.ogg" type="AudioStream" id=11]
 
 [sub_resource type="DynamicFont" id=1]
 size = 84
-outline_size = 3
-outline_color = Color( 0, 0, 0, 1 )
+outline_size = 5
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 4 )
@@ -27,6 +27,56 @@ tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "points": PoolRealArray( 84, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath(".:rect_rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( -7.97665, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath(".:rect_position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 226, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath(".:rect_position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 144, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath(".:rect_size:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 771, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath(".:rect_size:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 112, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
 
@@ -48,7 +98,6 @@ tracks/0/keys = {
 [sub_resource type="DynamicFont" id=4]
 size = 36
 outline_size = 2
-outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 3 )
@@ -197,6 +246,39 @@ tracks/4/keys = {
 size = 68
 font_data = ExtResource( 4 )
 
+[sub_resource type="AtlasTexture" id=42]
+flags = 4
+atlas = ExtResource( 8 )
+region = Rect2( 10, 248, 101, 102 )
+filter_clip = true
+
+[sub_resource type="RectangleShape2D" id=43]
+extents = Vector2( 48, 48 )
+
+[sub_resource type="AtlasTexture" id=44]
+flags = 4
+atlas = ExtResource( 8 )
+region = Rect2( 237, 248, 103, 101 )
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id=45]
+flags = 4
+atlas = ExtResource( 8 )
+region = Rect2( 490, 355, 100, 100 )
+
+[sub_resource type="RectangleShape2D" id=46]
+extents = Vector2( 48, 48 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=47]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=48]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=49]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=50]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=51]
+
 [sub_resource type="BoxShape" id=39]
 extents = Vector3( 22, 11.832, 4 )
 
@@ -213,11 +295,12 @@ script = ExtResource( 5 )
 [node name="Label" type="Label" parent="startScreen"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -385.5
-margin_top = 63.0
-margin_right = 385.5
-margin_bottom = 175.0
-custom_colors/font_color = Color( 0.615686, 0.870588, 0.388235, 1 )
+margin_left = 226.0
+margin_top = 144.0
+margin_right = 997.0
+margin_bottom = 256.0
+rect_rotation = -7.97665
+custom_colors/font_color = Color( 0.94902, 0.47451, 0.411765, 1 )
 custom_fonts/font = SubResource( 1 )
 text = "Froggie Run"
 align = 1
@@ -232,9 +315,9 @@ anims/title_anim = SubResource( 3 )
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 65.0
-margin_top = -325.0
+margin_top = -471.0
 margin_right = 301.0
-margin_bottom = -57.0
+margin_bottom = -203.0
 grow_vertical = 2
 custom_constants/vseparation = 20
 
@@ -265,10 +348,10 @@ focus_neighbour_top = NodePath("../restartButton")
 focus_neighbour_bottom = NodePath("../settingsButton")
 focus_next = NodePath("../settingsButton")
 focus_previous = NodePath("../restartButton")
-custom_colors/font_color_focus = Color( 0.670588, 0.662745, 0.145098, 1 )
-custom_colors/font_color = Color( 0.921569, 0.909804, 0.243137, 1 )
-custom_colors/font_color_hover = Color( 0.670588, 0.662745, 0.145098, 1 )
-custom_colors/font_color_pressed = Color( 0.921569, 0.909804, 0.243137, 1 )
+custom_colors/font_color_focus = Color( 0.717647, 0.65098, 0.0901961, 1 )
+custom_colors/font_color = Color( 0.717647, 0.65098, 0.0901961, 1 )
+custom_colors/font_color_hover = Color( 1, 0.909804, 0.145098, 1 )
+custom_colors/font_color_pressed = Color( 0.717647, 0.65098, 0.0901961, 1 )
 custom_fonts/font = SubResource( 4 )
 custom_styles/hover = SubResource( 6 )
 custom_styles/pressed = SubResource( 7 )
@@ -287,9 +370,11 @@ focus_neighbour_top = NodePath("../playButton")
 focus_neighbour_bottom = NodePath("../quitButton")
 focus_next = NodePath("../quitButton")
 focus_previous = NodePath("../playButton")
-custom_colors/font_color_focus = Color( 0.533333, 0.788235, 0.372549, 1 )
-custom_colors/font_color_hover = Color( 0.533333, 0.788235, 0.372549, 1 )
-custom_colors/font_color_pressed = Color( 0.423529, 0.619608, 0.301961, 1 )
+custom_colors/font_color_disabled = Color( 0.545098, 0.137255, 0.576471, 1 )
+custom_colors/font_color_focus = Color( 0.545098, 0.137255, 0.576471, 1 )
+custom_colors/font_color = Color( 0.545098, 0.137255, 0.576471, 1 )
+custom_colors/font_color_hover = Color( 0.945098, 0.25098, 1, 1 )
+custom_colors/font_color_pressed = Color( 0.545098, 0.137255, 0.576471, 1 )
 custom_fonts/font = SubResource( 4 )
 custom_styles/hover = SubResource( 11 )
 custom_styles/pressed = SubResource( 12 )
@@ -306,9 +391,10 @@ margin_right = 224.0
 margin_bottom = 196.0
 focus_neighbour_top = NodePath("../settingsButton")
 focus_previous = NodePath("../settingsButton")
-custom_colors/font_color_focus = Color( 0.533333, 0.788235, 0.372549, 1 )
-custom_colors/font_color_hover = Color( 0.533333, 0.788235, 0.372549, 1 )
-custom_colors/font_color_pressed = Color( 0.423529, 0.619608, 0.301961, 1 )
+custom_colors/font_color_focus = Color( 0.670588, 0.168627, 0.168627, 1 )
+custom_colors/font_color = Color( 0.670588, 0.168627, 0.168627, 1 )
+custom_colors/font_color_hover = Color( 1, 0.25098, 0.25098, 1 )
+custom_colors/font_color_pressed = Color( 0.670588, 0.168627, 0.168627, 1 )
 custom_fonts/font = SubResource( 4 )
 custom_styles/hover = SubResource( 16 )
 custom_styles/pressed = SubResource( 17 )
@@ -329,6 +415,9 @@ margin_top = -36.0
 margin_right = 1328.0
 margin_bottom = 767.0
 color = Color( 1, 1, 1, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="startScreen/ColorRect"]
 autoplay = "fade_in"
@@ -340,26 +429,71 @@ unique_name_in_owner = true
 visible = false
 
 [node name="Label" type="Label" parent="hud"]
-margin_left = 26.0
-margin_top = 25.0
-margin_right = 262.0
-margin_bottom = 93.0
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -270.0
+margin_top = 36.0
+margin_right = -36.0
+margin_bottom = 104.0
 custom_fonts/font = SubResource( 41 )
 text = "0"
+align = 2
+
+[node name="touch" type="Control" parent="hud"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -40.0
+margin_right = 40.0
+
+[node name="move_left" type="TouchScreenButton" parent="hud/touch"]
+position = Vector2( 60, -120 )
+normal = SubResource( 42 )
+shape = SubResource( 43 )
+
+[node name="touch2" type="Control" parent="hud"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -40.0
+margin_top = -40.0
+
+[node name="move_right" type="TouchScreenButton" parent="hud/touch2"]
+position = Vector2( -120, -120 )
+normal = SubResource( 44 )
+shape = SubResource( 43 )
+
+[node name="move_jump" type="TouchScreenButton" parent="hud/touch2"]
+position = Vector2( -120, -260 )
+normal = SubResource( 45 )
+shape = SubResource( 46 )
 
 [node name="froggie3d" parent="." instance=ExtResource( 1 )]
 unique_name_in_owner = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -2 )
 
+[node name="Froggie" parent="froggie3d" index="0"]
+transform = Transform( -1.09278e-08, 0, 0.25, 0, 0.25, 0, -0.25, 0, -1.09278e-08, 0, 0, 0 )
+
+[node name="state" parent="froggie3d" index="2"]
+parameters/playback = SubResource( 47 )
+parameters/Dead/playback = SubResource( 48 )
+parameters/Idle/playback = SubResource( 49 )
+parameters/Run/playback = SubResource( 50 )
+parameters/Wave/playback = SubResource( 51 )
+
 [node name="Camera" type="Camera" parent="froggie3d"]
-transform = Transform( -0.976296, 0.0560187, -0.209065, 0, 0.965926, 0.258819, 0.21644, 0.252684, -0.94303, 0.140184, 1.59298, -1.78981 )
+transform = Transform( -0.94971, 0.0810447, -0.302463, 0, 0.965926, 0.258819, 0.313133, 0.245803, -0.917349, 0.0210581, 1.54735, -1.92851 )
 current = true
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( -0.784907, -0.0351944, -0.618613, -0.330228, 0.868536, 0.369586, 0.52428, 0.494374, -0.693343, -5.98719, 8.01671, 9.10985 )
 light_color = Color( 1, 0.882353, 0.882353, 1 )
-light_energy = 7.281
+light_energy = 7.076
 shadow_enabled = true
+directional_shadow_mode = 1
+directional_shadow_blend_splits = true
+directional_shadow_max_distance = 50.0
 
 [node name="music" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
@@ -384,17 +518,11 @@ shape = SubResource( 39 )
 
 [node name="lane_str" parent="tiles" instance=ExtResource( 7 )]
 
-[node name="lane_str2" parent="tiles" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0 )
-
 [node name="lane_str3" parent="tiles" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 0 )
 
 [node name="lane_str4" parent="tiles" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 128 )
-
-[node name="lane_str5" parent="tiles" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 128 )
 
 [node name="lane_str6" parent="tiles" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 128 )
@@ -402,11 +530,23 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 128 )
 [node name="lane_str7" parent="tiles" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -128 )
 
-[node name="lane_str8" parent="tiles" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -128 )
-
 [node name="lane_str9" parent="tiles" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -128 )
+
+[node name="lane_str8_center" parent="tiles" groups=["CENTER_TILE"] instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -128 )
+
+[node name="csgbox2" parent="tiles/lane_str8_center" index="0" groups=["CENTER_TILE"]]
+
+[node name="lane_str5_center" parent="tiles" groups=["CENTER_TILE"] instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 128 )
+
+[node name="csgbox2" parent="tiles/lane_str5_center" index="0" groups=["CENTER_TILE"]]
+
+[node name="lane_str2_center" parent="tiles" groups=["CENTER_TILE"] instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0 )
+
+[node name="csgbox2" parent="tiles/lane_str2_center" index="0" groups=["CENTER_TILE"]]
 
 [node name="container" type="Area" parent="."]
 
@@ -420,9 +560,17 @@ shape = SubResource( 40 )
 [connection signal="mouse_entered" from="startScreen/buttons/settingsButton" to="startScreen" method="_on_button_mouseover"]
 [connection signal="mouse_entered" from="startScreen/buttons/quitButton" to="startScreen" method="_on_button_mouseover"]
 [connection signal="pressed" from="startScreen/buttons/quitButton" to="startScreen" method="_on_quitButton_pressed"]
+[connection signal="pressed" from="hud/touch/move_left" to="." method="_on_move_left_pressed"]
+[connection signal="pressed" from="hud/touch2/move_right" to="." method="_on_move_right_pressed"]
+[connection signal="pressed" from="hud/touch2/move_jump" to="." method="_on_move_jump_pressed"]
+[connection signal="released" from="hud/touch2/move_jump" to="." method="_on_move_jump_released"]
 [connection signal="body_entered" from="trail_repeat" to="." method="_on_trail_repeat_body_entered"]
 [connection signal="area_entered" from="trail_destroy" to="." method="_on_trail_destroy_area_entered"]
 [connection signal="body_entered" from="trail_destroy" to="." method="_on_trail_destroy_body_entered"]
 [connection signal="body_exited" from="container" to="." method="_on_container_body_exited"]
 
+[editable path="froggie3d"]
 [editable path="tiles/lane_str"]
+[editable path="tiles/lane_str8_center"]
+[editable path="tiles/lane_str5_center"]
+[editable path="tiles/lane_str2_center"]
